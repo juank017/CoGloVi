@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:sec="http://www.springframework.org/security/tags">
+
+<!-- 	<ui:include src="/facelets/header.xhtml" /> -->
+	<div class="contentMenu">
+		<ul class="nav">
+			<li class="liModulo"><h:form>
+					<p:commandLink action="menuPrincipalGestionDocumental" styleClass="selectModulo" value=" #{msg['gestiondocumental.modulo']}" />
+				</h:form></li>
+
+
+
+			<!-- PANEL GROUP DE NOTIFICACIONES -->
+			<h:panelGroup rendered="#{sec:areAnyGranted('ROLE_GENERAR_NOTIFICACION_PERSONAL_C')
+											or false}">
+
+				<li class="flechaDesplega"><a href="#"><h:outputText value=" #{msg['gestiondocumental.menuPrincipal.notificaciones']}" /></a>
+					<ul class="desplegable">
+						<li><h:form>
+								<p:commandLink action="generarNotificacionPersonal" value=" #{msg['gestiondocumental.generacionNotificaciones.title']}"
+									rendered="#{sec:areAnyGranted('ROLE_GENERAR_NOTIFICACION_PERSONAL_C')}" />
+							</h:form></li>
+						<li><h:form>
+								<p:commandLink action="goToEntregaDocumentos" value=" #{msg['gestiondocumental.entregaDocumentos.title']}" rendered="false" />
+							</h:form></li>
+						<li><h:form>
+								<p:commandLink action="goToConsultarDocumentosAvisoModulo" value=" #{msg['gestiondocumental.generacionNotificaciones.consultarDocumentos']}"
+									rendered="false" />
+							</h:form></li>
+						<li><h:form>
+								<p:commandLink action="configuracionCanales" value=" #{msg['gestiondocumental.generacionNotificaciones.configuracionCanales']}"
+									rendered="false" />
+							</h:form></li>
+						<li><h:form>
+								<p:commandLink action="consultarNotificaciones" value=" #{msg['gestiondocumental.generacionNotificaciones.consultarNotificaciones']}"
+									rendered="true" />
+							</h:form></li>
+						<li class="ultimo"><a href="#"></a></li>
+					</ul></li>
+				<li class="separador"><span>|</span></li>
+			</h:panelGroup>
+
+			<h:panelGroup
+				rendered="#{sec:areAnyGranted('ROLE_ENVIO_DOCUMENTOS_IMPRESION_C')
+								 or	sec:areAnyGranted('ROLE_ENVIO_CORRESPONDENCIA_C')
+								 or sec:areAnyGranted('ROLE_REGISTRO_CORRESPONDENCIA_C')
+								 or sec:areAnyGranted('ROLE_CONSULTAR_CORRESPONDENCIA_C')
+								 or sec:areAnyGranted('ROLE_GENERACION_PAQUETE_C')}">
+				<li class="flechaDesplega"><a href="#"><h:outputText value=" #{msg['gestiondocumental.menuPrincipal.correspondencia']}" /></a>
+					<ul class="desplegable">
+						<li><h:form>
+								<p:commandLink action="enviarDocumentosImpresion" value=" #{msg['gestiondocumental.enviarDocumentoImpresion']}"
+									rendered="#{sec:areAnyGranted('ROLE_ENVIO_DOCUMENTOS_IMPRESION_C')}" />
+							</h:form></li>
+						<li><h:form>
+								<p:commandLink action="envioCorrespondencia" value=" #{msg['gestiondocumental.envioCorrespondencia']}"
+									rendered="#{sec:areAnyGranted('ROLE_ENVIO_CORRESPONDENCIA_C')}" />
+							</h:form></li>
+						<li><h:form>
+								<p:commandLink action="registroCorrespondencia" value=" #{msg['gestiondocumental.registroCorrespondencia']}"
+									rendered="#{sec:areAnyGranted('ROLE_REGISTRO_CORRESPONDENCIA_C')}" />
+							</h:form></li>
+						<li><h:form>
+								<p:commandLink action="consultarCorrespondencia" value=" #{msg['gestiondocumental.consultarCorrespondencia']}"
+									rendered="#{sec:areAnyGranted('ROLE_CONSULTAR_CORRESPONDENCIA_C')}" />
+							</h:form></li>
+						<li><h:form>
+								<p:commandLink action="generacionPaquete" value=" #{msg['gestiondocumental.enviarPaqueteCorrespondencia.title']}"
+									rendered="#{sec:areAnyGranted('ROLE_GENERACION_PAQUETE_C')}" />
+							</h:form></li>
+						<li class="ultimo"><a href="#"></a></li>
+					</ul></li>
+				<li class="separador"><span>|</span></li>
+			</h:panelGroup>
+
+			<h:panelGroup
+				rendered="#{sec:areAnyGranted('ROLE_ASIGNAR_SOLICITUD_C')
+								 or	sec:areAnyGranted('ROLE_IMPRESION_DOCUMENTOS_C')
+								 or sec:areAnyGranted('ROLE_CONSULTA_DOCUMENTOS_C')
+								 or sec:areAnyGranted('ROLE_REIMPRESION_DOCUMENTOS_C')}">
+				<li class="flechaDesplega"><a href="#"><h:outputText value=" #{msg['impresiones.modulo']}" /></a>
+					<ul class="desplegable">
+
+						<li><h:form>
+								<p:commandLink action="asignarSolicitud" value=" #{msg['impresiones.menuppal.asignar.solicitud']}"
+									rendered="#{sec:areAnyGranted('ROLE_ASIGNAR_SOLICITUD_C')}" />
+							</h:form></li>
+						<li><h:form>
+								<p:commandLink action="impresionDocumentos" value=" #{msg['impresiones.menuppal.impresion.documentos']}"
+									rendered="#{sec:areAnyGranted('ROLE_IMPRESION_DOCUMENTOS_C')}" />
+							</h:form></li>
+						<li><h:form>
+								<p:commandLink action="impresionDocumentosChip" value=" #{msg['impresiones.menuppal.impresionChip.documentos']}"
+									rendered="#{sec:areAnyGranted('ROLE_IMPRESION_CHIP_DOCUMENTOS_C')}" />
+							</h:form></li>
+						<li><h:form>
+								<p:commandLink action="consultarImpresiones" value=" #{msg['impresiones.consultarImpresiones.title']}"
+									rendered="#{sec:areAnyGranted('ROLE_CONSULTA_DOCUMENTOS_C')}" />
+							</h:form></li>
+						<li><h:form>
+								<p:commandLink action="reimprimirDocumento" value=" #{msg['impresiones.reimprimirDocumento.title']}"
+									rendered="#{sec:areAnyGranted('ROLE_REIMPRESION_DOCUMENTOS_C')}" />
+							</h:form></li>
+						<li><h:form>
+								<p:commandLink action="reimpresionDocumentosChip" value=" #{msg['impresiones.menuppal.reimpresionChip.documentos']}"
+									rendered="#{sec:areAnyGranted('ROLE_REIMPRESION_CHIP_DOCUMENTOS_C')}" />
+							</h:form></li>
+						<li class="ultimo"><a href="#"></a></li>
+					</ul></li>
+				<li class="separador"><span>|</span></li>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{sec:areAnyGranted('ROLE_FIRMA_DIGITAL_C')
+								 or	sec:areAnyGranted('CONSULTA_DOCUMENTO_XX')
+								 or sec:areAnyGranted('ROLE_CARGAR_ARCHIVOS_C')
+								 or sec:areAnyGranted('ROLE_CARGAR_ARCHIVOS_TRANSFERENCIA_C')
+								 or sec:areAnyGranted('ROLE_PROCESOS_CARGA_C')
+								 or sec:areAnyGranted('ROLE_EXPORTAR_CARPETA_C')}">
+				<li class="flechaDesplega"><a href="#"><h:outputText value=" #{msg['gestiondocumental.menuPrincipal.otrasOpciones']}" /> </a>
+					<ul class="desplegable">
+
+						<h:panelGroup rendered="#{sec:areAnyGranted('ROLE_FIRMA_DIGITAL_C')}">
+							<li><a href="#" class="flechaSubmenu"><h:outputText value=" #{msg['gestiondocumental.firmaDigital']}" /></a>
+								<ul class="izquierda">
+									<li><h:form>
+											<p:commandLink action="firmarDocumentos" value=" #{msg['gestiondocumental.firmarDocumentos']}"
+												rendered="#{sec:areAnyGranted('ROLE_FIRMA_DIGITAL_C')}" />
+										</h:form></li>
+									<li class="ultimo"><a href="#"></a></li>
+								</ul></li>
+						</h:panelGroup>
+
+						<h:panelGroup rendered="#{sec:areAnyGranted('CONSULTA_DOCUMENTO_XX')}">
+
+							<li><a href="#" class="flechaSubmenu"><h:outputText value=" #{msg['gestiondocumental.admonDocumentos']}" /></a>
+								<ul class="izquierda">
+									<h:form>
+										<p:commandLink action="consultarDocumentos" value=" #{msg['gestiondocumental.consultarDocumentos.title']}"
+											rendered="#{sec:areAnyGranted('CONSULTA_DOCUMENTO_XX')}" />
+									</h:form>
+									<li class="ultimo"><a href="#"></a></li>
+								</ul></li>
+						</h:panelGroup>
+
+						<h:panelGroup
+							rendered="#{sec:areAnyGranted('ROLE_CARGAR_ARCHIVOS_C')
+								 or sec:areAnyGranted('ROLE_CARGAR_ARCHIVOS_TRANSFERENCIA_C')
+								 or sec:areAnyGranted('ROLE_PROCESOS_CARGA_C')
+								 or sec:areAnyGranted('ROLE_EXPORTAR_CARPETA_C')}">
+
+							<li><a href="#" class="flechaSubmenu"><h:outputText value=" #{msg['gestiondocumental.administracionArchivos']}" /></a>
+								<ul class="izquierda">
+									<li><h:form>
+											<p:commandLink action="cargaArchivosTransferencia" value=" #{msg['gestiondocumental.cargarArchivosTransferencia']}"
+												rendered="#{sec:areAnyGranted('ROLE_CARGAR_ARCHIVOS_TRANSFERENCIA_C')}" />
+										</h:form></li>
+									<li><h:form>
+											<p:commandLink action="cargaArchivos" value=" #{msg['gestiondocumental.cargarArchivos']}"
+												rendered="#{sec:areAnyGranted('ROLE_CARGAR_ARCHIVOS_C')}" />
+										</h:form></li>
+									<li><h:form>
+											<p:commandLink action="procesoCargaInformacion" value=" #{msg['gestiondocumental.procesoCargaInformacion.title']}"
+												rendered="#{sec:areAnyGranted('ROLE_PROCESOS_CARGA_C')}" />
+										</h:form></li>
+									<li><h:form>
+											<p:commandLink action="exportarCarpeta" value=" #{msg['gestiondocumental.exportarCarpeta.title']}"
+												rendered="#{sec:areAnyGranted('ROLE_EXPORTAR_CARPETA_C')}" />
+										</h:form></li>
+									<li class="ultimo"><a href="#"></a></li>
+								</ul></li>
+							<li class="ultimo"><a href="#"></a></li>
+						</h:panelGroup>
+					</ul></li>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{sec:areAnyGranted('ROLE_ADMON_PERSONA_BR_C, ROLE_ADMON_PERSONA_C')}">
+				<li class="separador"><span>|</span></li>
+<!-- 				<li class="flechaDesplega"><a href="#"><h:outputText value=" #{common['common.generales']}" /> </a> <ui:include -->
+<!-- 						src="/WEB-INF/componentesFacelets/opcionesGenerales.xhtml" /></li> -->
+			</h:panelGroup>
+		</ul>
+	</div>
+	<div class="cleared"></div>
+</ui:composition>

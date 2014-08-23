@@ -1,0 +1,142 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+	<h:form>
+		<ui:repeat value="#{conversationScope.trail}" var="bcrumb" varStatus="status">
+			<p:commandLink value="#{msg['gestiondocumental.modulo.title']}" action="#{bcrumb.getViewState}"
+				rendered="#{'menuPrincipalGestionDocumental' eq bcrumb.label}" disabled="#{status.index eq conversationScope.trail.size()-1}"
+				styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+			</p:commandLink>
+
+			<h:panelGroup rendered="#{'envioCorrespondencia' eq bcrumb.label}">
+				<h:outputText value="#{msg['gestiondocumental.notificaciones']} > " styleClass="label" />
+				<p:commandLink value="#{msg['gestiondocumental.envioCorrespondencia']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{'registroCorrespondencia' eq bcrumb.label}">
+				<h:outputText value="#{msg['gestiondocumental.notificaciones']} > " styleClass="label" />
+				<p:commandLink value="#{msg['gestiondocumental.registroCorrespondencia']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{'consultarCorrespondencia' eq bcrumb.label}">
+				<h:outputText value="#{msg['gestiondocumental.notificaciones']} > " styleClass="label" />
+				<p:commandLink value="#{msg['gestiondocumental.consultarCorrespondencia']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{'enviarDocumentosImpresion' eq bcrumb.label}">
+				<h:outputText value="#{msg['gestiondocumental.notificaciones']} > " styleClass="label" />
+				<p:commandLink value="#{msg['gestiondocumental.enviarDocumentoImpresion']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{'asignarSolicitud' eq bcrumb.label}">
+				<h:outputText value="#{msg['impresiones.modulo.titulo']} > " styleClass="label" />
+				<p:commandLink value="#{msg['impresiones.menuppal.asignar.solicitud']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{'impresionDocumentos' eq bcrumb.label}">
+				<h:outputText value="#{msg['impresiones.modulo.titulo']} > " styleClass="label" />
+				<p:commandLink value="#{msg['impresiones.menuppal.impresion.documentos']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{'impresionDocumentosChip' eq bcrumb.label}">
+				<h:outputText value="#{msg['impresiones.modulo.titulo']} > " styleClass="label" />
+				<p:commandLink value="#{msg['impresiones.menuppal.impresionChip.documentos']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{'consultarImpresiones' eq bcrumb.label}">
+				<h:outputText value="#{msg['impresiones.modulo.titulo']} > " styleClass="label" />
+				<p:commandLink value="#{msg['impresiones.consultarImpresiones.title']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{'reimprimirDocumento' eq bcrumb.label}">
+				<h:outputText value="#{msg['impresiones.modulo.titulo']} > " styleClass="label" />
+				<p:commandLink value="#{msg['impresiones.reimprimirDocumento.title']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+
+			<h:panelGroup rendered="#{'reimprimirDocumentoChip' eq bcrumb.label}">
+				<h:outputText value="#{msg['impresiones.modulo.titulo']} > " styleClass="label" />
+				<p:commandLink value="#{msg['impresiones.menuppal.reimpresionChip.documentos']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{'cargaArchivos' eq bcrumb.label}">
+				<h:outputText value="#{msg['gestiondocumental.administracionArchivos']} > " styleClass="label" />
+				<p:commandLink value="#{msg['gestiondocumental.cargarArchivos']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{'cargaArchivosTransferencia' eq bcrumb.label}">
+				<h:outputText value="#{msg['gestiondocumental.administracionArchivos']} > " styleClass="label" />
+				<p:commandLink value="#{msg['gestiondocumental.cargarArchivosTransferencia']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{'procesoCargaInformacion' eq bcrumb.label}">
+				<h:outputText value="#{msg['gestiondocumental.administracionArchivos']} > " styleClass="label" />
+				<p:commandLink value="#{msg['gestiondocumental.procesoCargaInformacion.title']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{'exportarCarpeta' eq bcrumb.label}">
+				<h:outputText value="#{msg['gestiondocumental.administracionArchivos']} > " styleClass="label" />
+				<p:commandLink value="#{msg['gestiondocumental.exportarCarpeta.title']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{'generacionPaquete' eq bcrumb.label}">
+				<h:outputText value="#{msg['gestiondocumental.notificaciones']} > " styleClass="label" />
+				<p:commandLink value="#{msg['gestiondocumental.generacionpaquetes.title']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{'adicionarPaquete' eq bcrumb.label}">
+				<p:commandLink value="#{msg['gestiondocumental.adicionarpaquetes.title']}" action="#{bcrumb.getViewState}"
+					disabled="#{status.index eq conversationScope.trail.size()-1}"
+					styleClass="#{status.index eq conversationScope.trail.size()-1?'label':'linkBread'}">
+				</p:commandLink>
+			</h:panelGroup>
+
+			<h:outputText value=" > " rendered="#{status.index lt conversationScope.trail.size()-1}" />
+		</ui:repeat>
+	</h:form>
+</ui:composition>
