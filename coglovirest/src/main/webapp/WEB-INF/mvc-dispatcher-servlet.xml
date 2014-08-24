@@ -8,13 +8,13 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-    <context:component-scan base-package="co.com.quipux.gestionapp" />
+    <context:component-scan base-package="co.edu.eafit.coglovi" />
     <import resource="config/applicationContext-datasource.xml" />
     <mvc:annotation-driven />
     
 	<security:global-method-security secured-annotations="enabled" />
     <mvc:interceptors>
-    	<bean id="authenticationInterceptor" class="co.com.quipux.gestionapp.restservice.security.AuthenticationInterceptor">
+    	<bean id="authenticationInterceptor" class="co.edu.eafit.coglovi.restservice.security.AuthenticationInterceptor">
 			<property name="authenticationManager" ref="authenticationManager" />
 		</bean>
   	</mvc:interceptors>
