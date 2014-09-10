@@ -11,14 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import co.edu.eafit.coglovi.model.security.UsuarioSistema;
 import co.edu.eafit.coglovi.transversal.Sha;
 
 
@@ -74,14 +72,14 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 			if (authorization != null) {
 				String[] credentials = decodeHeader(authorization);
 				credentials[1] = Sha.hash256(credentials[1]);
-				UsuarioSistema usuarioSistema = null;//seguridadManager.findQuipuxUsuarioCAS(credentials[0], credentials[1]);
-				if (usuarioSistema != null) {
-					List<GrantedAuthority> userRoles = getGrantedAuthorities(usuarioSistema.getRecursos());
-					Authentication authentication = new UsernamePasswordAuthenticationToken(credentials[0], credentials[1], userRoles);
-					SecurityContextHolder.getContext().setAuthentication(authentication);
-				}else{
-					SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("",""));
-				}
+				//UsuarioSistema usuarioSistema = null;//seguridadManager.findQuipuxUsuarioCAS(credentials[0], credentials[1]);
+//				if (usuarioSistema != null) {
+//					List<GrantedAuthority> userRoles = getGrantedAuthorities(usuarioSistema.getRecursos());
+//					Authentication authentication = new UsernamePasswordAuthenticationToken(credentials[0], credentials[1], userRoles);
+//					SecurityContextHolder.getContext().setAuthentication(authentication);
+//				}else{
+//					SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("",""));
+//				}
 			}else{
 				SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("",""));
 			}

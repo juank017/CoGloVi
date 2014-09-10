@@ -3,8 +3,6 @@ package co.edu.eafit.coglovi.util.impl;
 import java.sql.Connection;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.annotation.Resource.AuthenticationType;
 import javax.sql.DataSource;
@@ -17,8 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import co.edu.eafit.coglovi.core.model.util.Lista;
 import co.edu.eafit.coglovi.dao.util.DaoUtil;
 import co.edu.eafit.coglovi.dao.util.ListaDao;
-import co.edu.eafit.coglovi.dao.util.impl.ListaDaoJdbc;
-import co.edu.eafit.coglovi.exception.QxException;
+import co.edu.eafit.coglovi.exception.CoGloViException;
 import co.edu.eafit.coglovi.util.ListaManager;
 
 /**
@@ -46,13 +43,13 @@ public class ListaManagerImpl implements ListaManager {
 	 */
 	@Override
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
-	public Lista findDescColumna(String tabla, String descColumna, String campoFiltro, String valorFiltro) throws QxException {
+	public Lista findDescColumna(String tabla, String descColumna, String campoFiltro, String valorFiltro) throws CoGloViException {
 		Connection connection = null;
 		try {
 			connection = dataSource.getConnection();
 			return listaDao.findDescColumna(tabla, descColumna, campoFiltro, valorFiltro, connection);
 		} catch (Exception e) {
-			throw new QxException(e.getMessage(), e);
+			throw new CoGloViException(e.getMessage(), e);
 		} finally {
 			daoUtil.closeResources(connection);
 		}
@@ -65,14 +62,14 @@ public class ListaManagerImpl implements ListaManager {
 	 */
 	@Override
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
-	public List<Lista> findListaPorTabla(String tabla, String idColumna, String descColumn) throws QxException {
+	public List<Lista> findListaPorTabla(String tabla, String idColumna, String descColumn) throws CoGloViException {
 		Connection connection = null;
 		List<Lista> listSelect = null;
 		try {
 			connection = dataSource.getConnection();
 			listSelect = listaDao.findListaPorTabla(tabla, idColumna, descColumn, connection);
 		} catch (Exception e) {
-			throw new QxException(e.getMessage(), e);
+			throw new CoGloViException(e.getMessage(), e);
 		} finally {
 			daoUtil.closeResources(connection);
 		}
@@ -82,14 +79,14 @@ public class ListaManagerImpl implements ListaManager {
 	@Override
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public List<Lista> findListaPorTabla(String tabla, String idColumna, String descColumna, String campoFiltro, String valorFiltro)
-			throws QxException {
+			throws CoGloViException {
 		Connection connection = null;
 		List<Lista> listSelect = null;
 		try {
 			connection = dataSource.getConnection();
 			listSelect = listaDao.findListaPorTabla(tabla, idColumna, descColumna, campoFiltro, valorFiltro, connection);
 		} catch (Exception e) {
-			throw new QxException(e.getMessage(), e);
+			throw new CoGloViException(e.getMessage(), e);
 		} finally {
 			daoUtil.closeResources(connection);
 		}
@@ -105,7 +102,7 @@ public class ListaManagerImpl implements ListaManager {
 	@Override
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public List<Lista> findListaPorTabla(String tabla, String idColumna, String descColumna, String campoFiltro1, String valorFiltro1,
-			String campoFiltro2, String valorFiltro2) throws QxException {
+			String campoFiltro2, String valorFiltro2) throws CoGloViException {
 		Connection connection = null;
 		List<Lista> listSelect = null;
 		try {
@@ -113,7 +110,7 @@ public class ListaManagerImpl implements ListaManager {
 			listSelect = listaDao
 					.findListaPorTabla(tabla, idColumna, descColumna, campoFiltro1, valorFiltro1, campoFiltro2, valorFiltro2, connection);
 		} catch (Exception e) {
-			throw new QxException(e.getMessage(), e);
+			throw new CoGloViException(e.getMessage(), e);
 		} finally {
 			daoUtil.closeResources(connection);
 		}
