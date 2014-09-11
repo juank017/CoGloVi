@@ -44,27 +44,29 @@ public class UsuariosRest {
 //	@Secured("ROLE_COGLOVI_REST_C")
 	public RestResponse registrar(@RequestParam(value = "usuarioApp", required = true, defaultValue = "false") String usuarioApp,
 			@RequestParam(value = "gruposInteres", required = true, defaultValue = "false") String gruposInteres) {
-
+		
 		UsuarioAPP usuarioAPP = null;
 		List<GrupoInteres> listGruposInteres=null;
+		RestResponse restResponse;
+		restResponse = new RestResponse();
 		try {
 			usuarioAPP = new Gson().fromJson(usuarioApp, UsuarioAPP.class);
 			listGruposInteres = (List<GrupoInteres>) new Gson().fromJson(gruposInteres, new TypeToken<List<GrupoInteres>>() {
 			}.getType());
-			usuarioManager.registroUsuario(usuarioAPP,gruposInteres);
-			
-			restResponse = administraUsuarioPlacaManager.registrarse(usuarioAPP, listRegistroUsuarioVehiculo);
+			boolean isRegistred=usuarioManager.registroUsuario(usuarioAPP,listGruposInteres);
+			if(isRegistred){
+				restResponse.setCode(Constantes.RegistroUsuarios.REGISTRO_EXITOSO);
+			}else{
+				restResponse.setCode(Constantes.RegistroUsuarios.USUARIO_EXISTE);
+			}
 		} catch (CoGloViException e) {
-			restResponse = new RestResponse();
 			restResponse.setCode(Constantes.CodigoEstadoComucacion.ERROR_DATOS);
-			restResponse.setDescription(PropertiesManager.getText("qxgestionapp.administrarUsuarioPlaca.existeUsuario"));
+			restResponse.setDescription(PropertiesManager.getText("coglovi.autenticaSeguridad.Login.iniciarSesion.errorDatos"));
 		} catch (Exception e) {
-			restResponse = new RestResponse();
 			restResponse.setCode(Constantes.CodigoEstadoComucacion.ERROR_TECNICO);
-			restResponse.setDescription(PropertiesManager.getText("qxgestionapp.autenticaSeguridad.Login.iniciarSesion.errorTecnico"));
+			restResponse.setDescription(PropertiesManager.getText("coglovi.autenticaSeguridad.Login.iniciarSesion.errorTecnico"));
 			logger.error(e.getMessage(), e);
 		}
-
 		return restResponse;
 	}
 }
