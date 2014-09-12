@@ -1,5 +1,6 @@
 package co.edu.eafit.coglovi.restservice.usuarios;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -38,10 +39,8 @@ public class UsuariosRest {
 	 * @param vehiculo
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	@RequestMapping("/registrar")
 	@ResponseBody
-//	@Secured("ROLE_COGLOVI_REST_C")
 	public RestResponse registrar(@RequestParam(value = "usuarioApp", required = true, defaultValue = "false") String usuarioApp,
 			@RequestParam(value = "gruposInteres", required = true, defaultValue = "false") String gruposInteres) {
 		
@@ -68,5 +67,43 @@ public class UsuariosRest {
 			logger.error(e.getMessage(), e);
 		}
 		return restResponse;
+	}
+	
+	@RequestMapping("/login")
+	@ResponseBody
+	public RestResponse login(@RequestParam(value = "usuarioApp", required = true, defaultValue = "false") String usuarioApp) {
+		UsuarioAPP usuarioAPP = null;
+		RestResponse restResponse= new RestResponse();
+		try {
+			usuarioAPP = new Gson().fromJson(usuarioApp, UsuarioAPP.class);
+			boolean isValidUser=usuarioManager.isValidUsuario(usuarioAPP);
+			if(isValidUser){
+				restResponse.setCode(Constantes.RegistroUsuarios.REGISTRO_EXITOSO);
+			}else{
+				restResponse.setCode(Constantes.RegistroUsuarios.USUARIO_EXISTE);
+			}
+		} catch (CoGloViException e) {
+			restResponse.setCode(Constantes.CodigoEstadoComucacion.ERROR_DATOS);
+			restResponse.setDescription(PropertiesManager.getText("coglovi.autenticaSeguridad.Login.iniciarSesion.errorDatos"));
+		} catch (Exception e) {
+			restResponse.setCode(Constantes.CodigoEstadoComucacion.ERROR_TECNICO);
+			restResponse.setDescription(PropertiesManager.getText("coglovi.autenticaSeguridad.Login.iniciarSesion.errorTecnico"));
+			logger.error(e.getMessage(), e);
+		}
+		return restResponse;
+	}
+
+		
+	
+	
+	public static void main(String[] args) {
+		Gson gson=new Gson();
+		UsuarioAPP usuarioApp= new UsuarioAPP();
+		usuarioApp.setNombres("Pepe");
+		usuarioApp.setIdUsuario(2L);
+		usuarioApp.setFechaRegistro(new Date());
+		
+		String gsonString=gson.toJson(usuarioApp);
+		System.out.println(gsonString);
 	}
 }

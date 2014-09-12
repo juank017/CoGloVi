@@ -23,7 +23,7 @@ public class UsuarioAPPDaoJdbc extends DaoTemplate implements UsuarioAPPDao {
 
 	@Override
 	public UsuarioAPP findUsuario(UsuarioAPP usuarioApp) throws Exception {
-		String sql = PropertiesManager.obtenerCadena("cogloviSQL/cogloviSQL","usuarioSistema.findUsuario");
+		String sql = PropertiesManager.obtenerCadena("cogloviSQL/cogloviSQL","core.usuarios.find.email");
 		RowMapper<UsuarioAPP> rm = new RowMapper<UsuarioAPP>() {
 			public UsuarioAPP mapRow(ResultSet rs, int rowNum)throws SQLException {
 				UsuarioAPP usuario = new UsuarioAPP();
@@ -34,7 +34,6 @@ public class UsuarioAPPDaoJdbc extends DaoTemplate implements UsuarioAPPDao {
 				return usuario;
 			}
 		};
-		
 		try {
 			return jdbcTemplate.queryForObject(sql,new Object[]{usuarioApp.getCorreoElectronico()}, rm);
 		} catch (EmptyResultDataAccessException e) {
@@ -44,8 +43,17 @@ public class UsuarioAPPDaoJdbc extends DaoTemplate implements UsuarioAPPDao {
 
 	@Override
 	public void insertUsuario(UsuarioAPP usuarioAPP) {
-		// TODO Auto-generated method stub
-		
+		String sql = PropertiesManager.obtenerCadena("cogloviSQL/cogloviSQL","core.usuarios.insert");
+		jdbcTemplate.update(  
+				    sql,  
+				    new Object[] { usuarioAPP.getNroDocumento(),
+				    		usuarioAPP.getNombres(),
+				    		usuarioAPP.getApellidos(), 
+				    		usuarioAPP.getCelular(),
+				    		usuarioAPP.getCorreoElectronico(),
+				    		usuarioAPP.getClave()});  
 	}
+	
+	
 
 }

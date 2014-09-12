@@ -67,6 +67,6 @@ public interface DaoUtil {
 	 * @param sequenceName
 	 * @return long
 	 */
-	long getSecuenciaLong(String sequenceName);
+	long getSecuenciaLong();
 
 }

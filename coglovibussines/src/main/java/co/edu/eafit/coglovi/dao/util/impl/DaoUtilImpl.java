@@ -110,9 +110,9 @@ public class DaoUtilImpl extends DaoTemplate implements DaoUtil {
 	 */
 	@Override
 	public int getSecuenciaInt(String sequenceName) {
-		String sql = PropertiesManager.obtenerCadena("coreSQL/coreSQL",
-				"util.getSecuencia");
-		return jdbcTemplate.queryForInt(sql.replace("<NAME>", sequenceName));
+		String sql = PropertiesManager.obtenerCadena("cogloviSQL/cogloviSQL",
+				"core.lastinsertid");
+		return jdbcTemplate.queryForInt(sql);
 	}
 
 	/*
@@ -123,9 +123,8 @@ public class DaoUtilImpl extends DaoTemplate implements DaoUtil {
 	 * String)
 	 */
 	@Override
-	public long getSecuenciaLong(String sequenceName) {
-		String sql = PropertiesManager.obtenerCadena("coreSQL/coreSQL",
-				"util.getSecuencia");
-		return jdbcTemplate.queryForLong(sql.replace("<NAME>", sequenceName));
+	public long getSecuenciaLong() {
+		String sql = PropertiesManager.obtenerCadena("cogloviSQL/cogloviSQL","core.lastinsertid");
+		return jdbcTemplate.queryForLong(sql);
 	}
 }

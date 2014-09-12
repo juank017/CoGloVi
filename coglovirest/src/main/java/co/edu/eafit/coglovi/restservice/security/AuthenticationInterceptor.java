@@ -72,7 +72,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 			if (authorization != null) {
 				String[] credentials = decodeHeader(authorization);
 				credentials[1] = Sha.hash256(credentials[1]);
-				//UsuarioSistema usuarioSistema = null;//seguridadManager.findQuipuxUsuarioCAS(credentials[0], credentials[1]);
+				//UsuarioSistema usuarioSistema = null;//seguridadManager.findCoGloVi(credentials[0], credentials[1]);
 //				if (usuarioSistema != null) {
 //					List<GrantedAuthority> userRoles = getGrantedAuthorities(usuarioSistema.getRecursos());
 //					Authentication authentication = new UsernamePasswordAuthenticationToken(credentials[0], credentials[1], userRoles);
