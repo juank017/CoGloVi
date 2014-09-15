@@ -1,5 +1,6 @@
 package co.edu.eafit.coglovi.restservice.usuarios;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -69,7 +70,7 @@ public class UsuariosRest {
 		return restResponse;
 	}
 	
-	@RequestMapping("/preguntas/registro")
+	@RequestMapping("/login")
 	@ResponseBody
 	public RestResponse login(@RequestParam(value = "usuarioApp", required = true, defaultValue = "false") String usuarioApp) {
 		UsuarioAPP usuarioAPP = null;
@@ -99,11 +100,19 @@ public class UsuariosRest {
 	public static void main(String[] args) {
 		Gson gson=new Gson();
 		UsuarioAPP usuarioApp= new UsuarioAPP();
-		usuarioApp.setNombres("Pepe");
-		usuarioApp.setIdUsuario(2L);
-		usuarioApp.setFechaRegistro(new Date());
+		usuarioApp.setNombres("Juan Carlos");
+		usuarioApp.setNroDocumento("70698799");
+		usuarioApp.setCelular("3116162188");
+		usuarioApp.setApellidos("Ramirez");
+		usuarioApp.setCorreoElectronico("juan3116162188@gmail.com");
+		usuarioApp.setClave("juancarlos1");
 		
-		String gsonString=gson.toJson(usuarioApp);
-		System.out.println(gsonString);
+		List<GrupoInteres> listGrupoInteres=new ArrayList<GrupoInteres>();
+		GrupoInteres grupoInteres=new GrupoInteres();
+		grupoInteres.setGruposInteres("MA");
+		listGrupoInteres.add(grupoInteres);
+		
+		System.out.println(gson.toJson(listGrupoInteres));
+		System.out.println(gson.toJson(usuarioApp));
 	}
 }

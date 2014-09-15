@@ -37,6 +37,8 @@ public class UsuarioManagerImpl implements UsuarioManager {
 				gruposInteres.getUsuarioApp().setIdUsuario(idUsuario);
 				grupoInteresDao.insert(gruposInteres);
 			}
+		}else{
+			return false;
 		}
 		return true;
 	}
@@ -45,7 +47,7 @@ public class UsuarioManagerImpl implements UsuarioManager {
 	public boolean isValidUsuario(UsuarioAPP usuarioAPP) throws Exception {
 		UsuarioAPP usuarioAppResponse = usuarioAppDao.findUsuario(usuarioAPP);
 		boolean isUserValid=false;
-		if (usuarioAppResponse!=null&&usuarioAPP.getClave().equals(usuarioAppResponse.getIdUsuario())) {
+		if (usuarioAppResponse!=null&&usuarioAPP.getClave().equals(usuarioAppResponse.getClave())) {
 			isUserValid=true;
 		}
 		return isUserValid;

@@ -20,6 +20,7 @@ public class PreguntaManagerImpl implements PreguntaManager {
 	private UsuarioAPPDao usuarioAppDao;
 	@Autowired
 	private DaoUtil daoUtil;
+
 	@Autowired
 	private PreguntaDao preguntaDao;
 
