@@ -69,7 +69,7 @@ public class UsuariosRest {
 		return restResponse;
 	}
 	
-	@RequestMapping("/login")
+	@RequestMapping("/preguntas/registro")
 	@ResponseBody
 	public RestResponse login(@RequestParam(value = "usuarioApp", required = true, defaultValue = "false") String usuarioApp) {
 		UsuarioAPP usuarioAPP = null;

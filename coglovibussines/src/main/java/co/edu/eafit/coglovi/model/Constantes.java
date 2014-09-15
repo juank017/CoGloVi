@@ -14,4 +14,8 @@ public class Constantes {
 		public static final int REGISTRO_EXITOSO=100;
 		public static final int USUARIO_EXISTE = 102;
 	}
+	public static class RegistroPregunta{
+		public static final int REGISTRO_EXITOSO=100;
+		public static final int REGISTRO_ERROR=102;
+	}
 }
