@@ -18,4 +18,7 @@ public class Constantes {
 		public static final int REGISTRO_EXITOSO=100;
 		public static final int REGISTRO_ERROR=102;
 	}
+	public static class EstadoPreguntas{
+		public static final int ESTADO_PENDIENTE=1;
+	}
 }
